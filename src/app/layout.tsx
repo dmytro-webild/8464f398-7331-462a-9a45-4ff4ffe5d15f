@@ -1,0 +1,40 @@
+import type { Metadata } from "next";
+import { Halant } from "next/font/google";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { ServiceWrapper } from "@/components/ServiceWrapper";
+import Tag from "@/tag/Tag";
+import { getVisualEditScript } from "@/utils/visual-edit-script";
+
+
+
+export const metadata: Metadata = {
+  title: 'LUMIÈRE | Premium Luxury Skincare',
+  description: 'Discover science-backed, luxury skincare products for radiant, healthy skin. Natural ingredients, cruelty-free, dermatologist-approved.',
+};
+
+const inter = Inter({
+  variable: "--font-inter",  subsets: ["latin"],
+});
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <ServiceWrapper>
+        <body className={`${inter.variable} antialiased`}>
+          <Tag />
+          {children}
+          <script
+              dangerouslySetInnerHTML={{
+                  __html: `${getVisualEditScript()}`
+          }}
+        />
+        </body>
+      </ServiceWrapper>
+    </html>
+  );
+}
